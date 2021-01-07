@@ -11,7 +11,6 @@ const App = () => {
     const [errorMessage, setErrorMessage] = useState('')
 
     const hook = () => {
-        console.log("hello?")
         contactService
             .getAll()
             .then(responseData => {
