@@ -51,7 +51,7 @@ describe('POST api/blogs', () => {
         await api
             .post('/api/blogs')
             .send(newBlog)
-            .expect(200)
+            .expect(201)
             .expect('Content-Type', /application\/json/)
     })
 
@@ -86,11 +86,6 @@ describe('POST api/blogs', () => {
         const addedBlog = blogs.body.find(blog => blog.title === blogWithoutLikesProperty.title)
         expect(addedBlog.likes).toBe(0)
     })
-})
-
-describe('DELETE api/blogs/id', () => {
-
-
 })
 
 afterAll(() => {
