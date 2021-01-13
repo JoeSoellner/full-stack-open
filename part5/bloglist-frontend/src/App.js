@@ -20,6 +20,14 @@ const App = () => {
 		)
 	}, [])
 
+	useEffect(() => {
+		const loggedUserJSON = window.localStorage.getItem('loggedInBlogAppUser')
+		if (loggedUserJSON) {
+			const user = JSON.parse(loggedUserJSON)
+			setUser(user)
+		}
+	}, [])
+
 	const loginHandler = async (event) => {
 		event.preventDefault()
 
