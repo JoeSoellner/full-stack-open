@@ -24,11 +24,18 @@ const App = () => {
 				username, password
 			})
 			setUser(currUser)
+			window.localStorage.setItem('loggedInBlogAppUser', JSON.stringify(currUser))
 			setUsername('')
 			setPassword('')
 		} catch (exception) {
 			window.alert('Wrong credentials')
 		}
+	}
+
+	const logoutHandler = (event) => {
+		event.preventDefault()
+		window.localStorage.removeItem('loggedInBlogAppUser')
+		setUser(null)
 	}
 
 	if (user === null) {
@@ -48,6 +55,8 @@ const App = () => {
 			<div>
 				<h2>blogs</h2>
 				<p>{user.name} logged-in</p>
+				<button type="submit" onClick={logoutHandler}>Logout</button>
+
 				{blogs.map(blog =>
 					<Blog key={blog.id} blog={blog} />
 				)}
