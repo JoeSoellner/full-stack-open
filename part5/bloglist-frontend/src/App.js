@@ -84,6 +84,20 @@ const App = () => {
 		setBlogs([...blogs])
 	}
 
+	const removeButtonClickHandler = async (deletedBlog) => {
+		try {
+			const token = `bearer ${JSON.parse(window.localStorage.getItem('loggedInBlogAppUser')).token}`
+			await blogService.remove(deletedBlog, token)
+			
+			const removedBlogIndex = blogs.findIndex(blog => blog.id === deletedBlog.id)
+			blogs.splice(removedBlogIndex, 1)
+			setBlogs([...blogs])
+		} catch (exception) {
+			window.alert('Invalid input')
+			console.log(exception)
+		}
+	}
+
 	if (user === null) {
 		return (
 			<div>
@@ -104,7 +118,9 @@ const App = () => {
 				<button type="submit" onClick={logoutHandler}>Logout</button>
 
 				{blogs.map(blog =>
-					<Blog key={blog.id} blog={blog} likeButtonClickHandler={likeButtonClickHandler}/>
+					<Blog key={blog.id} blog={blog}
+					likeButtonClickHandler={likeButtonClickHandler}
+					removeButtonClickHandler={removeButtonClickHandler}/>
 				)}
 				<Togglable buttonLabel={'create blog'}>
 					<h2>create new blog</h2>

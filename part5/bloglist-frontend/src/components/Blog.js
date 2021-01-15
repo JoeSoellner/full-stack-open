@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Blog = ({ blog, likeButtonClickHandler }) => {
+const Blog = ({ blog, likeButtonClickHandler, removeButtonClickHandler }) => {
 	const blogStyle = {
 	  paddingTop: 10,
 	  paddingLeft: 2,
@@ -22,6 +22,12 @@ const Blog = ({ blog, likeButtonClickHandler }) => {
 		likeButtonClickHandler(updatedBlog)
 	}
 
+	const removeBlog = (blogToRemove) => {
+		const result = window.confirm(`Remove blog: ${blogToRemove.title}`);
+		if(result)
+			removeButtonClickHandler(blogToRemove)
+	}
+
 	const showDetails = (visible) => {
 		if(visible) {
 			return (
@@ -29,7 +35,8 @@ const Blog = ({ blog, likeButtonClickHandler }) => {
 					{blog.author} <br />
 					{blog.url} <br />
 					{'likes: '} {blog.likes}
-					<button onClick={() => addLikeToBlog(blog)} type='submit'>like</button>
+					<button onClick={() => addLikeToBlog(blog)} type='submit'>like</button> <br />
+					<button onClick={() => removeBlog(blog)} type='submit'>remove</button>
 				</div>
 			)
 		} else {
