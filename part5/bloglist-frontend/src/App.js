@@ -13,9 +13,10 @@ const App = () => {
 	const [user, setUser] = useState(null)
 
 	useEffect(() => {
-		blogService.getAll().then(blogs =>
-			setBlogs(blogs)
-		)
+		blogService.getAll().then(blogs => {
+			const sortedBlogs = sortBlogs(blogs)
+			setBlogs(sortedBlogs)
+		})
 	}, [])
 
 	useEffect(() => {
@@ -52,11 +53,28 @@ const App = () => {
 		try {
 			const token = `bearer ${JSON.parse(window.localStorage.getItem('loggedInBlogAppUser')).token}`
 			const response = await blogService.create(newBlog, token)
-			setBlogs(blogs.concat(response))
+			const sortedBlogs = sortBlogs(blogs.concat(response))
+			setBlogs(sortedBlogs)
 		} catch (exception) {
 			window.alert('Invalid input')
 			console.log(exception)
 		}
+	}
+
+	const sortBlogs = (blogsToSort) => {
+		const blogCompator = (blog1, blog2) => {
+			if (blog1.likes < blog2.likes) {
+				return -1;
+			  }
+			  if (blog1.likes > blog2.likes) {
+				return 1;
+			  }
+			  return 0;
+		}
+
+		blogsToSort.sort(blogCompator)
+		blogsToSort.reverse()
+		return blogsToSort
 	}
 
 	const likeButtonClickHandler = async (updatedBlog) => {
