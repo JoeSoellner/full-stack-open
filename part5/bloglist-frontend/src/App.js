@@ -10,9 +10,6 @@ const App = () => {
 	const [blogs, setBlogs] = useState([])
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
-	const [title, setTitle] = useState('')
-	const [author, setAuthor] = useState('')
-	const [url, setUrl] = useState('')
 	const [user, setUser] = useState(null)
 
 	useEffect(() => {
@@ -51,23 +48,11 @@ const App = () => {
 		setUser(null)
 	}
 
-	const createBlogHandler = async (event) => {
+	const newBlogHandler = async (newBlog) => {
 		try {
-			event.preventDefault()
 			const token = `bearer ${JSON.parse(window.localStorage.getItem('loggedInBlogAppUser')).token}`
-			console.log(token)
-			const newBlog = {
-				title: title,
-				author: author,
-				url: url
-			}
-
 			const response = await blogService.create(newBlog, token)
-			console.log(response)
 			setBlogs(blogs.concat(response))
-			setTitle('')
-			setAuthor('')
-			setUrl('')
 		} catch (exception) {
 			window.alert('Invalid input')
 			console.log(exception)
@@ -99,10 +84,7 @@ const App = () => {
 				<Togglable buttonLabel={'create blog'}>
 					<h2>create new blog</h2>
 					<CreateBlogForm
-						title={title} setTitle={setTitle}
-						author={author} setAuthor={setAuthor}
-						url={url} setUrl={setUrl}
-						submitHandler={createBlogHandler}
+						newBlogHandler={newBlogHandler}
 					/>
 				</Togglable>
 			</div>
