@@ -59,6 +59,13 @@ const App = () => {
 		}
 	}
 
+	const likeButtonClickHandler = async (updatedBlog) => {
+		const response = await blogService.update(updatedBlog)
+		const oldBlogIndex = blogs.findIndex(blog => blog.title === updatedBlog.title)
+		blogs[oldBlogIndex] = response
+		setBlogs([...blogs])
+	}
+
 	if (user === null) {
 		return (
 			<div>
@@ -79,7 +86,7 @@ const App = () => {
 				<button type="submit" onClick={logoutHandler}>Logout</button>
 
 				{blogs.map(blog =>
-					<Blog key={blog.id} blog={blog} />
+					<Blog key={blog.id} blog={blog} likeButtonClickHandler={likeButtonClickHandler}/>
 				)}
 				<Togglable buttonLabel={'create blog'}>
 					<h2>create new blog</h2>

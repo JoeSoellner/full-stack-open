@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, likeButtonClickHandler }) => {
 	const blogStyle = {
 	  paddingTop: 10,
 	  paddingLeft: 2,
@@ -11,6 +11,17 @@ const Blog = ({ blog }) => {
 
 	const [detailsVisible, setDetailsVisible] = useState(false)
 
+	const addLikeToBlog = (blogToUpdate) => {
+		const updatedBlog = {
+			id: blogToUpdate.id,
+			title: blogToUpdate.title,
+			author: blogToUpdate.author,
+			url: blogToUpdate.url,
+			likes: blog.likes + 1
+		}
+		likeButtonClickHandler(updatedBlog)
+	}
+
 	const showDetails = (visible) => {
 		if(visible) {
 			return (
@@ -18,7 +29,7 @@ const Blog = ({ blog }) => {
 					{blog.author} <br />
 					{blog.url} <br />
 					{'likes: '} {blog.likes}
-					<button type='submit'>like</button>
+					<button onClick={() => addLikeToBlog(blog)} type='submit'>like</button>
 				</div>
 			)
 		} else {
