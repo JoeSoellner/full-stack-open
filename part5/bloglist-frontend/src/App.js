@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import LoginForm from './components/LoginForm'
 import CreateBlogForm from './components/CreateBlogForm'
+import Togglable from './components/Togglable'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -95,14 +96,15 @@ const App = () => {
 				{blogs.map(blog =>
 					<Blog key={blog.id} blog={blog} />
 				)}
-
-				<h2>create new blog</h2>
-				<CreateBlogForm
-					title={title} setTitle={setTitle}
-					author={author} setAuthor={setAuthor}
-					url={url} setUrl={setUrl}
-					submitHandler={createBlogHandler}
-				/>
+				<Togglable buttonLabel={'create blog'}>
+					<h2>create new blog</h2>
+					<CreateBlogForm
+						title={title} setTitle={setTitle}
+						author={author} setAuthor={setAuthor}
+						url={url} setUrl={setUrl}
+						submitHandler={createBlogHandler}
+					/>
+				</Togglable>
 			</div>
 		)
 	}
