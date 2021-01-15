@@ -15,4 +15,6 @@ const create = async (newBlog, token) => {
 	return response.data
 }
 
-export default { getAll, create }
+const exports = { getAll, create }
+
+export default exports
