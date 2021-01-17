@@ -45,7 +45,7 @@ const Blog = ({ blog, likeButtonClickHandler, removeButtonClickHandler }) => {
 	}
 	
 	return (
-	  <div style={blogStyle}>
+	  <div className={'blog'} style={blogStyle}>
 		<div>
 		  	{blog.title}
 		  	<button onClick={() => setDetailsVisible(!detailsVisible)} type='button'>
