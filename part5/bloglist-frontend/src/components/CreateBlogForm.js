@@ -22,10 +22,10 @@ const CreateBlogForm = ({ newBlogHandler }) => {
 	return (
 		<div>
 			<form onSubmit={createBlog}>
-				<FormInput valueName={'Title'} value={title} setValue={setTitle} type={'text'} />
-				<FormInput valueName={'Author'} value={author} setValue={setAuthor} type={'text'} />
-				<FormInput valueName={'URL'} value={url} setValue={setUrl} type={'text'} />
-				<button type='submit'>Add Blog</button>
+				<FormInput valueName={'Title'} value={title} setValue={setTitle} type={'text'} id={'title'}/>
+				<FormInput valueName={'Author'} value={author} setValue={setAuthor} type={'text'} id={'author'}/>
+				<FormInput valueName={'URL'} value={url} setValue={setUrl} type={'text'} id={'url'}/>
+				<button id={'submitBlogButton'} type='submit'>Add Blog</button>
 			</form>
 		</div>
 	)

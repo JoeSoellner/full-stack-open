@@ -35,8 +35,8 @@ const Blog = ({ blog, likeButtonClickHandler, removeButtonClickHandler }) => {
 					{blog.author} <br />
 					{blog.url} <br />
 					{'likes: '} {blog.likes}
-					<button onClick={() => addLikeToBlog(blog)} type='submit'>like</button> <br />
-					<button onClick={() => removeBlog(blog)} type='submit'>remove</button>
+					<button id={'likeButton'} onClick={() => addLikeToBlog(blog)} type='submit'>like</button> <br />
+					<button id={'removeBlogButton'} onClick={() => removeBlog(blog)} type='submit'>remove</button>
 				</div>
 			)
 		} else {
@@ -48,7 +48,7 @@ const Blog = ({ blog, likeButtonClickHandler, removeButtonClickHandler }) => {
 	  <div className={'blog'} style={blogStyle}>
 		<div>
 		  	{blog.title}
-		  	<button onClick={() => setDetailsVisible(!detailsVisible)} type='button'>
+		  	<button id={'detailsButton'} onClick={() => setDetailsVisible(!detailsVisible)} type='button'>
 				{detailsVisible ? 'hide' : 'details'}
 			</button>
 		</div>
